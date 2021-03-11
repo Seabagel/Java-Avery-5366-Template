@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <title>Page Title</title>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 0
+        }
+
+        thead th {
+            height: .5in
+        }
+
+        thead th:nth-child(1),
+        thead th:nth-child(5) {
+            width: .5375in
+        }
+
+        thead th:nth-child(2),
+        thead th:nth-child(4) {
+            width: 3.343in
+        }
+
+        thead th:nth-child(3) {
+            width: .557in
+        }
+
+        tbody td {
+            height: .667in
+        }
+
+        tbody td:nth-child(1),
+        tbody td:nth-child(5) {
+            width: .5375in
+        }
+
+        tbody td:nth-child(2),
+        tbody td:nth-child(4) {
+            width: 3.343in
+        }
+
+        tbody td:nth-child(3) {
+            width: .557in
+        }
+
+        tfoot td {
+            height: .4975in
+        }
+
+        tfoot td:nth-child(1),
+        tfoot td:nth-child(5) {
+            width: .5375in
+        }
+
+        tfoot td:nth-child(2),
+        tfoot td:nth-child(4) {
+            width: 3.343in
+        }
+
+        tfoot td:nth-child(3) {
+            width: .557in
+        }
+
+        table {
+            width: 8.5in;
+            height: 11in;
+            border-collapse: collapse;
+            padding: 0;
+            margin: 0
+        }
+
+        td,
+        th {
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        td p.midNumber:first-child {
+            color: lightgray;
+        }
+
+        td p:first-child {
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+            -webkit-print-color-adjust: exact
+        }
+
+        td p:last-child {
+            font-size: 14px;
+            padding: 0 12px 0 12px;
+            font-weight: 700;
+            position: relative;
+            top: 4px
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id=content>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+        </tbody>
+    </table>
+</body>
+<script>
+    let clientNumbers = Array(15).fill("\xa0");
+    //ZX
+    let tbody = document.getElementById("content");
+    let count = 1;
+    clientNumbers.forEach(element => {
+        addElement(element);
+    });
+
+    function addElement(caseName) {
+        // Make elements
+        let newTR = document.createElement("tr");
+        let newTDText1 = document.createElement("td");
+        let newPara1 = document.createElement("p");
+        let newPara2 = document.createElement("p");
+        let text1 = document.createTextNode("E-STORAGE");
+        let text2 = document.createTextNode(caseName);
+        let middleSeperator = document.createElement("td");
+
+        // Append nodes and make a copy
+        if (!!caseName) {
+            newPara1.appendChild(text1);
+            newPara2.appendChild(text2);
+        }
+        newTDText1.appendChild(newPara1);
+        newTDText1.appendChild(newPara2);
+        let newTDText2 = newTDText1.cloneNode(true);
+
+        // Make the middle text
+        let newNumbers = document.createElement("p");
+        newNumbers.setAttribute('class', 'midNumber')
+        middleSeperator.appendChild(newNumbers)
+        newNumbers.innerHTML = count;
+        count++;
+
+        // Make sure the variable isnt empty
+        newTR.appendChild(document.createElement("td"));
+        newTR.appendChild(newTDText1);
+        newTR.appendChild(middleSeperator);
+        newTR.appendChild(newTDText2);
+        newTR.appendChild(document.createElement("td"));
+
+        // Add it to the html body
+        tbody.appendChild(newTR);
+    };
+</script>
+
+</html>
